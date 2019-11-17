@@ -23,7 +23,8 @@ def RandPolytope(n, m):
     # x_2 = r*sin(t_1)*cos(t_2)
     # x_3 = r*sin(t_1)*sin(t_2)*cos(t_3)
     # ...
-    # x_n = r*sin(t_1)*...*sin(t_n-1)*cos(t_n)
+    # x_n-1 = r*sin(t_1)*...*sin(t_n-1)*cos(t_n)
+    # x_n = r*sin(t_1)*...*sin(t_n-1)*sin(t_n)
     r = random.uniform(1.0, 100.0)
     arr = []
     for i in range(m):
