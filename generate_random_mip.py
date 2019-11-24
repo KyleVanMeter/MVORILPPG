@@ -24,7 +24,8 @@ def GenRandMIP(n, m, filename):
 
     option = [0,1]
     binary_choice = [random.choice(option) for a in range(n)]
-    obj_coefs = [random.uniform(0.0, 10.0) for a in range(n)]
+    #obj_coefs = [random.uniform(0.0, 10.0) for a in range(n)]
+    obj_coefs = [1 for a in range(n)]
     x = [0 for a in range(n)]
     for i in range(n):
         if(binary_choice[i]):
@@ -37,8 +38,8 @@ def GenRandMIP(n, m, filename):
     # The 0 vector is the guaranteed point
     r = [0 for a in range(n)]
     # Get the H-representation of a polytope in n-dimensions with m points.
-    #A, b = RandPolytope(n, m)
-    A, b = So(n,m)
+    A, b = RandPolytope(n, m)
+    #A, b = So(n,m)
     print(A)
     print(b)
 
@@ -47,7 +48,7 @@ def GenRandMIP(n, m, filename):
         #    prob += pulp.lpSum([a[i]*x[i] for i in range(n)]) >= b[j]
         #else:
         #    prob += pulp.lpSum([a[i]*x[i] for i in range(n)]) <= b[j]
-        prob += pulp.lpSum([a[i]*x[i] for i in range(n)]) <= b[j]
+        prob += pulp.lpSum([a[i]*x[i] for i in range(n)]) <= -b[j]
 
     prob.writeLP(filename + ".lp")
 
