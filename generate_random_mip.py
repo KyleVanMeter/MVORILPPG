@@ -65,8 +65,8 @@ def RandPolytope(n, m):
     arr = []
     for i in range(m):
         angles = [np.deg2rad(random.randint(1,360)) for a in range(n-1)]
-        #arr.append(nsphere_to_cartesian(r,angles))
-        arr.append([random.uniform(0.0,50.0) for a in range(n)])
+        arr.append(nsphere_to_cartesian(r,angles))
+        #arr.append([random.uniform(0.0,50.0) for a in range(n)])
 
     # For now we just have the point (0) as our guaranteed point
     arr.append(np.array([0 for a in range(n)]))
