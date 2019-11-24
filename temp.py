@@ -6,6 +6,18 @@ import random
 import matplotlib.pyplot as plt
 import functools
 
+def RandConst(n,m, a=-50,b=50):
+    # This vector is our guaranteed solution
+    v = np.matrix([random.uniform(a,b) for i in range(n)])
+
+    # Random matrix n elements wide, and m tall
+    A = np.random.rand(m,n)
+
+    #delta = np.matrix([random.uniform(a/10.0,b/10.0) for i in range(m)])
+    b = A*v.T
+
+    return A.tolist(),b.tolist()
+
 def nsphere_to_cartesian(r, arr):
     a = np.concatenate((np.array([2*np.pi]), arr))
     si = np.sin(a)
@@ -44,9 +56,9 @@ def RandPolytope(n, m):
 # plot the feasible region
 d = np.linspace(-200,200,3000)
 x,y = np.meshgrid(d,d)
-coef1 = [[-1,0],[2,1],[-4,2],[1,-2]]
-coef2 = [-2,25,8,-5]
-coef1, coef2 = RandPolytope(2,3)
+#coef1 = [[-1,0],[2,1],[-4,2],[1,-2]]
+#coef2 = [-2,25,8,-5]
+coef1, coef2 = RandConst(2,4)
 print(coef1)
 print(coef2)
 A = [[coef1[i][0]*y+coef1[i][1]*x <= coef2[i]] for i in range(len(coef2))]
@@ -55,7 +67,7 @@ A = [[coef1[i][0]*y+coef1[i][1]*x <= coef2[i]] for i in range(len(coef2))]
 #                extent=(x.min(),x.max(),y.min(),y.max()),origin="lower", cmap="Greys", alpha = 0.3);
 #plt.imshow( ((A[0][0]) & (A[1][0]) & (A[2][0]) & (A[3][0])).astype(int) , 
 #                extent=(x.min(),x.max(),y.min(),y.max()),origin="lower", cmap="Greys", alpha = 0.3);
-plt.imshow( (functools.reduce(lambda a,b: a & b, [A[i][0] for i in range(len(A))])).astype(int), extent=(x.min(),x.max(),y.min(),y.max()),origin="lower", cmap="Greys", alpha = 0.3);
+plt.imshow( (functools.reduce(lambda a,b: a & b, [A[i][0] for i in range(len(A))])).astype(int), extent=(y.min(),y.max(),x.min(),x.max()),origin="lower", cmap="Greys", alpha = 0.3);
 
 # plot the lines defining the constraints
 x = np.linspace(-200, 200, 20000)
