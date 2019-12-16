@@ -61,7 +61,7 @@ def RandPolytope(n, m):
     # x_3 = r*sin(t_1)*sin(t_2)*cos(t_3)
     # ...
     # x_n = r*sin(t_1)*...*sin(t_n-1)*cos(t_n)
-    r = random.uniform(1.0, 10.0)
+    r = random.uniform(1.0, 1000.0)
     arr = []
     for i in range(m):
         angles = [np.deg2rad(random.randint(1,360)) for a in range(n-1)]
@@ -122,4 +122,15 @@ def RandReject(n,m):
 
     return A, b
 
-GenRandMIP(2,4, 'test2')
+#GenRandMIP(2,4, 'test2')
+
+def bs(x):
+    if x < 10:
+        return "0" + str(x)
+    else:
+        return str(x)
+
+for i in range(2,15):
+    for j in range(0,10):
+        filename = bs(j) + "dim_test" + bs(i)
+        GenRandMIP(i,i+2, filename)

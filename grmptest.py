@@ -54,3 +54,4 @@ f.set_ylim([p.ylim[0], p.ylim[1]+2])
 f.add_line(c, obj_val, p.xlim + [0.2, 0.8], p.ylim + [0.2, 1.8], 
            linestyle = 'dashed', color = 'black', label = "Objective Function")
 f.show()
+g = f.fig
